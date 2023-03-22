@@ -49,11 +49,9 @@ dd/mm/2023	1.0.0.1		XXX, Skyline	Initial version
 ****************************************************************************
 */
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using Skyline.DataMiner.Automation;
+using Skyline.DataMiner.Core.DataMinerSystem.Automation;
+using Skyline.DataMiner.Core.DataMinerSystem.Common;
 
 /// <summary>
 /// DataMiner Script Class.
@@ -66,6 +64,12 @@ public class Script
 	/// <param name="engine">Link with SLAutomation process.</param>
 	public void Run(Engine engine)
 	{
+		IDms dms = engine.GetDms();
 
+		var dmsElements = dms.GetElements();
+		foreach (IDmsElement dmsElement in dmsElements)
+		{
+			engine.GenerateInformation($"MOD - Element Name: {dmsElement.Name}");
+		}
 	}
 }
